@@ -23,7 +23,7 @@ class MainViewController: IASKAppSettingsViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Qmodi Client", comment: "")
+        title = NSLocalizedString("Qmodi Tracking App", comment: "")
         showCreditsFooter = false
         neverShowPrivacySettings = true
     }
