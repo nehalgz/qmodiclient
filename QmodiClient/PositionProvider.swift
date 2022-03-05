@@ -41,7 +41,7 @@ class PositionProvider: NSObject, CLLocationManagerDelegate {
         //interval = userDefaults.double(forKey: "frequency_preference")
         //distance = userDefaults.double(forKey: "distance_preference")
         //angle = userDefaults.double(forKey: "angle_preference")
-        interval = 010
+        interval = 060
         distance = 0
         angle = 0
         locationManager = CLLocationManager()

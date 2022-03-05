@@ -35,6 +35,8 @@
 	<string>This is a tracking application and therefore requires access to location services</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This is a tracking application and therefore requires access to location services</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>This is a tracking application and therefore requires access to location services.</string>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>

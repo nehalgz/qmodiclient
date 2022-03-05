@@ -17,6 +17,7 @@
 import UIKit
 import CoreData
 import Firebase
+import AppTrackingTransparency
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PositionProviderDelegate {
@@ -38,7 +39,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PositionProviderDelegate 
         #if FIREBASE
         FirebaseApp.configure()
         #endif
-
+        if #available(iOS 15.0, *) {
+                   ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                       
+                   })
+               }
+        
         UIDevice.current.isBatteryMonitoringEnabled = true
 
         let userDefaults = UserDefaults.standard
