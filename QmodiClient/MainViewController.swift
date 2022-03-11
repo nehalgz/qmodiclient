@@ -16,16 +16,34 @@
 
 import UIKit
 import InAppSettingsKit
+import CoreData
+import CoreLocation
 
 class MainViewController: IASKAppSettingsViewController {
     
     var settingsObserver: NSObjectProtocol?
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("Qmodi Tracking App", comment: "")
         showCreditsFooter = false
         neverShowPrivacySettings = true
+        
+        let locStatus = CLLocationManager.authorizationStatus()
+           switch locStatus {
+              case .notDetermined:
+                 locationManager.requestWhenInUseAuthorization()
+              return
+              case .denied, .restricted:
+                 let alert = UIAlertController(title: "Location Services are disabled", message: "Please enable Location Services in your Settings", preferredStyle: .alert)
+                 let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                 alert.addAction(okAction)
+                 present(alert, animated: true, completion: nil)
+              return
+              case .authorizedAlways, .authorizedWhenInUse:
+              break
+           }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -55,12 +73,10 @@ class MainViewController: IASKAppSettingsViewController {
         if let status = notification.userInfo?["service_status_preference"] as? Bool {
             if status && AppDelegate.instance.trackingController == nil {
                 let userDefaults = UserDefaults.standard
-                //let url = userDefaults.string(forKey: "server_url_preference")
-                //let frequency = userDefaults.integer(forKey: "frequency_preference")
-                let url =  "https://qmodi.com/tracker/"
-                let frequency = 010
-                //let candidateUrl = NSURL(string: url!)
-                let candidateUrl = NSURL(string: url)
+                let url = userDefaults.string(forKey: "server_url_preference")
+                let frequency = userDefaults.integer(forKey: "frequency_preference")
+                
+                let candidateUrl = NSURL(string: url!)
                 
                 if candidateUrl == nil || candidateUrl?.host == nil || (candidateUrl?.scheme != "http" && candidateUrl?.scheme != "https") {
                     self.showError("Invalid server URL")

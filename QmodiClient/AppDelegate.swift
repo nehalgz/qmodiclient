@@ -39,20 +39,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PositionProviderDelegate 
         #if FIREBASE
         FirebaseApp.configure()
         #endif
-        if #available(iOS 15.0, *) {
-                   ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-                       
-                   })
-               }
-        
+
         UIDevice.current.isBatteryMonitoringEnabled = true
 
         let userDefaults = UserDefaults.standard
         if userDefaults.string(forKey: "device_id_preference") == nil {
-            let identifier = "\(Int.random(in: 1000000000..<10000000000))"
+            let identifier = "\(Int.random(in: 100000..<1000000))"
             userDefaults.setValue(identifier, forKey: "device_id_preference")
         }
-
+        
+        //if #available(iOS 14.0, *) {
+        
+        
+             //  }
+        
         registerDefaultsFromSettingsBundle()
         
         migrateLegacyDefaults()
@@ -107,6 +107,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PositionProviderDelegate 
         }
         
         completionHandler(true)
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication){
+        if #available(iOS 14, *){
+            print("tracking")
+            ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                switch status {
+                               case .authorized:
+                                   // Tracking authorization dialog was shown
+                                   // and we are authorized
+                                   print("Authorized")
+                               case .denied:
+                                   // Tracking authorization dialog was
+                                   // shown and permission is denied
+                                   print("Denied")
+                               case .notDetermined:
+                                   // Tracking authorization dialog has not been shown
+                                   print("Not Determined")
+                               case .restricted:
+                                   print("Restricted ")
+                @unknown default: break
+                                  
+                               }
+            })
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     func didUpdate(position: Position) {
@@ -171,8 +198,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PositionProviderDelegate 
                 urlComponents.port = 5055
             }
             
-           // userDefaults.set(urlComponents.string, forKey: "server_url_preference")
-            // userDefaults.set(urlComponents.string, forKey: "https://qmodi.com/tracker/")
+            userDefaults.set(urlComponents.string, forKey: "https://qmodi.com/tracker/")
+            
             userDefaults.removeObject(forKey: "server_port_preference")
             userDefaults.removeObject(forKey: "server_address_preference")
             userDefaults.removeObject(forKey: "secure_preference")
