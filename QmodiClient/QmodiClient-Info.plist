@@ -36,7 +36,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This is a tracking application and therefore requires access to location services</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>This is a tracking application and therefore requires access to location services.</string>
+	<string>Qmodi Tracking App collects location data to enable tracking yours several loads and calculate distance travelled	when app is working or even when the app is closed or not in use. This data will be uploaded to qmodi.com where you can view and/or delete your location(Loads) tavelled history. Qmodi Tracking App collects location data to enable 1. Estimate/Actual Time Needed for each load trips 2. Distance traveled (Actual vs as on load map) estimate vs actual 3. Marking and Notifying on entry and exit of each Geo fence (Stops) in the load trips even when the app is closed or not in use.</string>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>
@@ -60,7 +60,6 @@
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>fetch</string>
 		<string>location</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
