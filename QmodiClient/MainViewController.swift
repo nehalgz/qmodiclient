@@ -73,10 +73,10 @@ class MainViewController: IASKAppSettingsViewController {
         if let status = notification.userInfo?["service_status_preference"] as? Bool {
             if status && AppDelegate.instance.trackingController == nil {
                 let userDefaults = UserDefaults.standard
-                let url = userDefaults.string(forKey: "server_url_preference")
-                let frequency = userDefaults.integer(forKey: "frequency_preference")
+                let url = "https://qmodi.com/tracker/"
+                let frequency = 010
                 
-                let candidateUrl = NSURL(string: url!)
+                let candidateUrl = NSURL(string: url)
                 
                 if candidateUrl == nil || candidateUrl?.host == nil || (candidateUrl?.scheme != "http" && candidateUrl?.scheme != "https") {
                     self.showError("Invalid server URL")

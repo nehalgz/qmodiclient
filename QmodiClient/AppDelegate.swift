@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PositionProviderDelegate 
 
         let userDefaults = UserDefaults.standard
         if userDefaults.string(forKey: "device_id_preference") == nil {
-            let identifier = "\(Int.random(in: 100000..<1000000))"
+            let identifier = "\(Int.random(in: 1000000000..<100000000000))"
             userDefaults.setValue(identifier, forKey: "device_id_preference")
         }
         
