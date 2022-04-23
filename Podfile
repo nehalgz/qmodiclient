@@ -5,6 +5,7 @@ target 'QmodiClient' do
   pod 'InAppSettingsKit'
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'
+  pod 'Firebase/Messaging'
 end
 
 target 'QmodiClientTests' do
